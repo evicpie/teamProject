@@ -1,8 +1,15 @@
-º» ÇÁ·ÎÁ§Æ®´Â Holiday ¼Ò½º °øÀ¯ ÀúÀå°ø°£ÀÔ´Ï´Ù
-¢º ÇÁ·ÎÁ§Æ®¸í  : Hotel Holiday
-¢º ÀÎ       ¿ø : 4¸í
-¢º D  B  M  S  : Oracle 11g Express Edition
-¢º ¾ğ       ¾î : Java SE 8 Platform, HTML5, CSS, CSS3, JavaScript
-¢º ÇÁ·¹ÀÓ¿öÅ©  : Spring Framework, MyBatis Framework
-¢º ¿ÀÇÂ Library: jQuery v3.2.1, jQuery UI v1.12.1, daum map api, ckEditor
-¢º ÇÁ·ÎÁ§Æ®¼Ò°³: °¡»óÀÇ È£ÅÚ ÇÁ·£Â÷ÀÌÁî°¡ µ¶ÀÚÀûÀÎ ¿¹¾à ½Ã½ºÅÛÀ» °®±âÀ§ÇØ ¸¸µç À¥ÆäÀÌÁö ÀÔ´Ï´Ù
+ë³¸ í”„ë¡œì íŠ¸ëŠ” Holiday ì†ŒìŠ¤ ê³µìœ  ì €ì¥ê³µê°„ì…ë‹ˆë‹¤
+
+â–¶ í”„ë¡œì íŠ¸ëª…  : Hotel Holiday
+
+â–¶ ì¸       ì› : 4ëª…
+
+â–¶ D  B  M  S  : Oracle 11g Express Edition
+
+â–¶ ì–¸       ì–´ : Java SE 8 Platform, HTML5, CSS, CSS3, JavaScript
+
+â–¶ í”„ë ˆì„ì›Œí¬  : Spring Framework, MyBatis Framework
+
+â–¶ ì˜¤í”ˆ Library: jQuery v3.2.1, jQuery UI v1.12.1, daum map api, ckEditor
+
+â–¶ í”„ë¡œì íŠ¸ì†Œê°œ: ê°€ìƒì˜ í˜¸í…” í”„ëœì°¨ì´ì¦ˆê°€ ë…ìì ì¸ ì˜ˆì•½ ì‹œìŠ¤í…œì„ ê°–ê¸°ìœ„í•´ ë§Œë“  ì›¹í˜ì´ì§€ ì…ë‹ˆë‹¤
