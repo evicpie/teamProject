@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Room">
+	<resultMap type="Room" id="RoomResult">
+		<result column="roomCode" property="roomCode"/>
+		<result column="hotelCode" property="hotelCode"/>
+		<result column="roomName" property="roomName"/>
+		<result column="roomGrade" property="roomGrade"/>
+		<result column="roomCost" property="roomCost"/>
+		<result column="roomLimit" property="roomLimit"/>
+		<result column="roomImg_1" property="roomImg_1"/>
+		<result column="roomImg_2" property="roomImg_2"/>
+		<result column="roomImg_3" property="roomImg_3"/>
+		<result column="roomImg_4" property="roomImg_4"/>
+		<result column="roomImg_5" property="roomImg_5"/>
+	</resultMap>
+	<select id="getStandardRoom" parameterType="String" resultType="Room">
+		SELECT * FROM ROOM WHERE HOTELCODE=#{hotelCode} AND ROOMCODE=#{hotelCode}||'_standard201'
+	</select>
+	<select id="getDeluxeRoom" parameterType="String" resultType="Room">
+		SELECT * FROM ROOM WHERE HOTELCODE=#{hotelCode} AND ROOMCODE=#{hotelCode}||'_deluxe701'
+	</select>
+	<select id="getSuiteRoom" parameterType="String" resultType="Room">
+		SELECT * FROM ROOM WHERE HOTELCODE=#{hotelCode} AND ROOMCODE=#{hotelCode}||'_suiteroom1001'
+	</select>
+	<update id="modifyRoomInfo" parameterType="Room">
+		UPDATE ROOM SET <if test="roomImg_1!=''"> 
+						roomIMG_1=#{roomImg_1}, 
+						</if>
+						<if test="roomImg_2!=''"> 
+						roomIMG_2=#{roomImg_2}, 
+						</if>
+						<if test="roomImg_3!=''"> 
+						roomIMG_3=#{roomImg_3}, 
+						</if>
+						<if test="roomImg_4!=''"> 
+						roomIMG_4=#{roomImg_4}, 
+						</if>
+						<if test="roomImg_5!=''"> 
+						roomIMG_5=#{roomImg_5}, 
+						</if>
+						roomCost=#{roomCost},
+						roomLimit=#{roomLimit}
+				  WHERE hotelCode=#{hotelCode} AND roomGrade=#{roomGrade}
+	</update>
+	
+	<!-- [은실] 객실 정보 하나 가져오는 쿼리 -->
+	<select id="getOneRoom" parameterType="String" resultType="Room">
+		SELECT * FROM ROOM WHERE ROOMCODE=#{roomCode}
+	</select>
+</mapper>

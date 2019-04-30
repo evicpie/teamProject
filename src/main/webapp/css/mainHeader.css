@@ -1,0 +1,58 @@
+/* header CSS File */
+@charset "UTF-8";
+
+* {   
+   padding:0;
+   margin:0;position: relative;
+}
+header a { text-decoration: none; }
+header li { list-style: none; }
+   
+header {
+   position: relative;
+   z-index: 2;
+}
+#hotel{
+   position: fixed;
+   top:0px;
+   left:0px;
+   width:1820px;
+   min-width: 1820px;
+   height: 0; /* [은실] 헤더의 투명 부분에서도 본문 부분을 클릭할 수 있도록 높이를 없앰*/
+   /* border:1px solid red; */
+
+}
+
+#gnb {
+   /* border:1px solid red; */
+   margin:0px 50px;
+   height:80px;
+   line-height:60px;
+   float:right;
+}
+   
+#gnb li {
+   margin:10px;
+   float:left;
+}
+
+/* 헤더 GNB 글자색 검정으로 수정 */
+#gnb li a {
+    color: black;
+}
+
+#logo{
+   margin: 0px 20px;
+   padding:30px;
+   height:90px;
+   width:100px;
+   float:left;
+   background-color:#eac49d;
+   border-radius: 0px 0px 20px 20px;
+   cursor: pointer;/* [은실] 로고에 마우스를 올리면 손 모양 커서가 나타나도록 하여 클릭하는 부분임을 알림 */
+}
+
+#logo img{
+   margin:0px;
+   width:100px;
+}

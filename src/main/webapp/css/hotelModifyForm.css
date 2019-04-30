@@ -1,0 +1,68 @@
+/* 고객센터 글 작성/수정 CSS */
+@charset "UTF-8";
+
+/* [은실] */
+#section #contentArea #content {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+caption{text-align: left; 
+		font-size: 2em; 
+		color: #74442d; 
+		font-weight: bold; 
+		padding: 200px 0 10px 0;
+}
+		
+#content table {
+	width: 900px;
+	margin: 0 auto;
+	border-radius: 20px;
+	border: 5px solid #eac49d;
+	-webkit-border-horizontal-spacing: 0;
+	border-spacing: 0;
+}
+
+table tr:nth-child(1) th:nth-child(1) {
+	padding: 5px;
+	background-color: #eac49d;
+	border-radius: 10px 0 0 0;
+}
+
+table tr:nth-child(1) td {
+	padding: 5px 10px 5px 10px;
+	border-radius: 0 50px 0 0;
+	border-bottom: 5px solid #eac49d;
+}
+
+#content table tr th {
+	padding: 5px;
+	background-color: #eac49d;
+	border-bottom: 5px solid white;
+}
+
+#content table tr:nth-child(8) th {
+	border-bottom: 0px;
+}
+
+#content table tr td {
+	padding: 5px 10px 5px 10px;
+	border-bottom: 5px solid #eac49d;
+}
+
+input[type="button"], input[type="reset"], input[type="submit"] {
+	height: 30px;
+	margin: 15px 0;
+	height: 30px;
+	width: 70px;
+	margin-left: 5px;
+	background-color: #eac49d;
+	color: white;
+	border: 1px solid #eac49d;
+	cursor: pointer;
+}
+
+#content table tr:last-child td:last-child {
+	border-bottom: 0px;
+	text-align: center;
+}

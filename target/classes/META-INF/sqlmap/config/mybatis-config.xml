@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+    
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.tj.hotel.model.Hotel" alias="Hotel"/>
+		<typeAlias type="com.tj.hotel.model.Room" alias="Room"/>
+		<typeAlias type="com.tj.hotel.model.Reservation" alias="Reservation"/>
+		<typeAlias type="com.tj.hotel.model.Support" alias="Support"/>
+		<typeAlias type="com.tj.hotel.model.Guest" alias="Guest"/>
+		<typeAlias type="com.tj.hotel.model.Hotel_Notice" alias="Hotel_Notice"/>
+		<typeAlias type="com.tj.hotel.model.Review" alias="Review"/>
+		<typeAlias type="com.tj.hotel.model.ReviewComment" alias="ReviewComment"/>
+		<typeAlias type="com.tj.hotel.model.Event" alias="Event"/>
+		<typeAlias type="com.tj.hotel.model.Admin" alias="Admin"/>
+		<!-- 다른 model class 추가하기 -->
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="META-INF/sqlmap/mappers/Hotel.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Room.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Reservation.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Support.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Guest.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Hotel_Notice.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Hotel_Review.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Review_Comment.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Event.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Admin.xml"/>
+		<!-- 다른 mapper xml파일 추가하기 -->
+		
+	</mappers>
+</configuration>

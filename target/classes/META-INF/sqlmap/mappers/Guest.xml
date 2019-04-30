@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "Guest">
+	<resultMap type="Guest" id="GuestResult">
+		<result property="guestId" column="guestId"/>
+		<result property="guestPw" column="guestPw"/>
+		<result property="guestName" column="guestName"/>
+		<result property="guestEmail" column="guestEmail"/>
+		<result property="guestPhone" column="guestPhone"/>
+		<result property="guestBirth" column="guestBirth"/>
+		<result property="guestStatus" column="guestStatus"/>
+	</resultMap>
+
+	<select id="idConfirm" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM GUEST WHERE GUESTID=#{guestId}
+
+	</select>
+	<select id="emailConfirm" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM GUEST WHERE GUESTEMAIL=#{guestEmail}
+
+	</select>
+	<insert id="joinGuest" parameterType="Guest">
+		INSERT INTO GUEST (GUESTID, GUESTPW, GUESTNAME, GUESTEMAIL, GUESTPHONE, GUESTBIRTH) VALUES (#{guestId}, #{guestPw}, #{guestName}, #{guestEmail}, #{guestPhone}, #{guestBirth}) 
+	</insert>
+	<select id="getGuest" parameterType="String" resultType="Guest">
+		SELECT * FROM GUEST WHERE GUESTID=#{guestId} 
+	</select>
+	<update id="modifyGuest" parameterType="Guest">
+		UPDATE GUEST SET
+		    GUESTPW =#{guestPw},
+		    GUESTNAME=#{guestName},
+		    GUESTEMAIL=#{guestEmail},
+		    GUESTPHONE=#{guestPhone},
+		    GUESTBIRTH=#{guestBirth}
+		    WHERE GUESTID=#{guestId}
+	</update>
+	<update id="withdraw" parameterType="Guest">
+		UPDATE GUEST SET
+   			 GUESTSTATUS = 0, GUESTEMAIL = NULL WHERE GUESTID=#{guestId}
+	</update>
+	<select id="findId" parameterType="Guest" resultType="String">
+		SELECT GUESTID FROM GUEST WHERE GUESTNAME = #{guestName} AND GUESTPHONE = #{guestPhone}
+	</select>
+	<select id="findPw" parameterType="String" resultType="Guest">
+		SELECT * FROM GUEST WHERE GUESTID = #{guestId} AND GUESTEMAIL = #{guestEmail}
+	</select>
+	<update id="pwReset" parameterType="Guest">
+		UPDATE GUEST SET GUESTPW = #{guestPw} WHERE GUESTID=#{guestId}
+	</update>
+	
+	<!-- [은실] 결제시 사용한 포인트 차감하는 쿼리 : 이 때의 guestPoint는 차감할 포인트를 의미 -->
+	<update id="usePoint" parameterType="Guest">
+		UPDATE GUEST SET GUESTPOINT=GUESTPOINT-#{guestPoint} WHERE GUESTID=#{guestId}
+	</update>
+	
+	<!-- [도은] 참여해서 포인트를 받아간 이벤트 번호를 DB에 기록하는 쿼리 -->
+	<update id="alreadyEvent" parameterType="Guest">
+	 UPDATE GUEST SET 
+	 	GETEVENT=GETEVENT||#{getEvent}||',' WHERE GUESTID=#{guestId}</update>
+	
+	<!-- [도은][희영] 사용자에게 포인트 부여하는 쿼리 : 중복이라서 하나만 남겼습니다~ -->
+	<update id="givingPoint" parameterType="Guest">
+         UPDATE GUEST SET GUESTPOINT = GUESTPOINT + #{guestPoint}
+          WHERE GUESTID = #{guestId}
+   </update>
+   
+   <!-- [희영] 관리자페이지에서 회원 검색 쿼리 -->
+   <select id="guestSearch" parameterType="Guest" resultMap="GuestResult">
+   	  SELECT * FROM 
+    	(SELECT ROWNUM RN, A.* FROM
+        	(SELECT * FROM GUEST WHERE 
+        <if test="schItem=='' or schItem==null">
+        	1=1
+        </if>
+        <if test="schItem=='guestId'">
+        	GUESTID LIKE '%' || #{schWord} || '%'
+        </if>
+        <if test="schItem=='guestName'">
+        	GUESTNAME LIKE '%' || #{schWord} || '%'
+        </if>
+        <if test="schItem=='guestPhone'">
+        	GUESTPHONE LIKE '%' || #{schWord} || '%'
+        </if>
+        <if test="schItem=='guestStatus'">
+        	GUESTSTATUS LIKE '%' || #{schWord} || '%'
+        </if>
+        ORDER BY GUESTID)A) WHERE RN BETWEEN #{startRow} AND #{endRow}
+   </select>
+   
+   <!-- [희영] 관리자페이지에서 게스트 등급 변경 쿼리 -->
+   <update id="updateGuestStatus" parameterType="Guest">
+   		UPDATE GUEST SET GUESTSTATUS = #{guestStatus}
+            WHERE GUESTID = #{guestId}
+   </update>
+
+   <!-- [희영] 게스트의 포인트를 조회하는 쿼리 -->
+   <select id="myPoint" parameterType="String" resultType="int">
+   		SELECT GUESTPOINT FROM GUEST WHERE GUESTID = #{guestId}
+   </select>
+   
+   <!-- [희영] 회원 수를 조회하는 쿼리 -->
+   <select id="countGuest" parameterType="Guest" resultType="int">
+   		SELECT COUNT(*) FROM GUEST
+   		<if test="schItem=='' or schItem==null">
+    		WHERE 1=1
+    	</if>
+	    <if test="schItem=='guestId'">
+	    	WHERE GUESTID LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='guestName'">
+	    	WHERE GUESTNAME LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='guestPhone'">
+	    	WHERE GUESTPHONE LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='guestStatus'">
+	    	WHERE GUESTSTATUS LIKE '%' || #{schWord} || '%'
+	    </if>
+   </select>
+</mapper>

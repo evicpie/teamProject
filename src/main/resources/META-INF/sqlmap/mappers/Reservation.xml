@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Reservation">
+	<resultMap type="Reservation" id="ReservationResult">
+		<result column="reserveCode" property="reserveCode"/>
+		<result column="hotelCode" property="hotelCode"/>
+		<result column="roomCode" property="roomCode"/>
+		<result column="guestId" property="guestId"/>
+		<result column="reserveCheckin" property="reserveCheckin"/>
+		<result column="reserveCheckout" property="reserveCheckout"/>
+		<result column="reviewStatus" property="reviewStatus"/>
+		<result column="paidPrice" property="paidPrice"/>
+		<result column="hotelName" property="hotelName"/>
+		<result column="roomName" property="roomName"/>
+		<result column="roomGrade" property="roomGrade"/>
+		<result column="roomCost" property="roomCost"/>
+		<result column="guestName" property="guestName"/>
+	</resultMap>
+	
+	<resultMap type="Room" id="RoomResult">
+      <result column="roomCode" property="roomCode"/>
+      <result column="hotelCode" property="hotelCode"/>
+      <result column="roomName" property="roomName"/>
+      <result column="roomGrade" property="roomGrade"/>
+      <result column="roomCost" property="roomCost"/>
+      <result column="roomLimit" property="roomLimit"/>
+      <result column="roomImg_1" property="roomImg_1"/>
+      <result column="roomImg_2" property="roomImg_2"/>
+      <result column="roomImg_3" property="roomImg_3"/>
+      <result column="roomImg_4" property="roomImg_4"/>
+      <result column="roomImg_5" property="roomImg_5"/>
+   </resultMap>
+	
+	<!-- 예약 가능 방 조회 쿼리 -->
+	<select id="availableRoom" parameterType="Reservation" resultMap="RoomResult">
+	<!-- #{}을 쓰면 알아서 DATE형이 되니까 TO_DATE()따위 쓰지 않아도 돼!!!! 으아아아ㅏㅏㅏㅏㅏㅏㅏㅏㅏ -->
+	<![CDATA[
+		SELECT * FROM ROOM WHERE HOTELCODE=#{hotelCode} AND ROOMCODE NOT IN (SELECT ROOMCODE FROM RESERVATION
+		WHERE HOTELCODE=#{hotelCode}
+		AND (RESERVECHECKIN BETWEEN #{reserveCheckin} AND #{reserveCheckout}-1 
+		OR RESERVECHECKOUT BETWEEN #{reserveCheckin}+1 AND #{reserveCheckout}
+		OR (#{reserveCheckin} >= RESERVECHECKIN AND #{reserveCheckout} <= RESERVECHECKOUT)))
+		AND ROOMLIMIT>=#{roomLimit}
+		AND ROOMGRADE=#{roomGrade} 
+		ORDER BY ROOMCODE
+	]]>	
+	</select> 
+	
+	<!-- 예약 쿼리 -->
+	<insert id="reserve" parameterType="Reservation">
+		INSERT INTO RESERVATION (RESERVECODE, HOTELCODE, ROOMCODE, GUESTID, RESERVECHECKIN, RESERVECHECKOUT, PAIDPRICE) 
+		VALUES (RESERVATION_SEQ.NEXTVAL, #{hotelCode}, #{roomCode}, #{guestId}, #{reserveCheckin}, #{reserveCheckout}, #{paidPrice})
+	</insert>
+	
+	<!-- 사용자: 지난 예약 조회 -->
+	<!-- 여기서의 reserveCheckin과 reserveCheckout은 검색기간의 시작과 종료점을 의미 -->
+	<select id="myPastReservation" parameterType="Reservation" resultMap="ReservationResult">
+		SELECT * FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM 
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) 
+		AND GUESTID=#{guestId} 
+		AND RESERVECHECKOUT &lt; EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 호텔별 검색 -->
+		<if test="hotelName != null and hotelName != ''">
+			AND HOTELNAME LIKE '%'||#{hotelName}||'%'
+		</if>
+		
+		<!-- 객실별 검색 -->
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		<!-- 기간별 검색 -->
+		<if test="(reserveCheckin!=null and reserveCheckin!='') and (reserveCheckout!=null and reserveCheckout!='')">
+			AND (RESERVECHECKIN>=#{reserveCheckin} AND RESERVECHECKIN &lt;=#{reserveCheckout})
+		</if>
+			 
+		ORDER BY RESERVECHECKIN DESC
+		) ALLIAS) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 사용자 : 나의 지난 예약 전체 개수 조회 쿼리  -->
+	<select id="myPastReservationCnt" parameterType="Reservation" resultType="int">
+		SELECT COUNT(*) FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM 
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) 
+		AND GUESTID=#{guestId} 
+		AND RESERVECHECKOUT &lt; EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 호텔별 검색 -->
+		<if test="hotelName != null and hotelName != ''">
+			AND HOTELNAME LIKE '%'||#{hotelName}||'%'
+		</if>
+		
+		<!-- 객실별 검색 -->
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		<!-- 기간별 검색 -->
+		<if test="(reserveCheckin!=null and reserveCheckin!='') and (reserveCheckout!=null and reserveCheckout!='')">
+			AND (RESERVECHECKIN>=#{reserveCheckin} AND RESERVECHECKIN &lt;=#{reserveCheckout})
+		</if>
+			 
+		ORDER BY RESERVECHECKIN DESC
+		) ALLIAS)
+	</select>
+	
+	<!-- 사용자: 예약 현황 조회 -->
+	<select id="myReservation" parameterType="Reservation" resultMap="ReservationResult">
+		SELECT * FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM 
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) 
+		AND GUESTID=#{guestId} 
+		AND RESERVECHECKIN>=EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 호텔별 검색 -->
+		<if test="hotelName != null and hotelName != ''">
+			AND HOTELNAME LIKE '%'||#{hotelName}||'%'
+		</if>
+		
+		ORDER BY RESERVECHECKIN ASC
+		) ALLIAS) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 사용자: 예약 현황 조회 총 개수 조회 쿼리-->
+	<select id="myReservationCnt" parameterType="Reservation" resultType="int">
+		SELECT COUNT(*) FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM 
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) 
+		AND GUESTID=#{guestId} 
+		AND RESERVECHECKIN>=EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 호텔별 검색 -->
+		<if test="hotelName != null and hotelName != ''">
+			AND HOTELNAME LIKE '%'||#{hotelName}||'%'
+		</if>
+		
+		ORDER BY RESERVECHECKIN ASC
+		) ALLIAS)
+	</select>
+	
+	<!-- 관리자: 지난 예약 조회 -->
+	<!-- 여기서의 reserveCheckin과 reserveCheckout은 검색기간의 시작과 종료점을 의미 -->
+	<select id="hotelPastReservation" parameterType="Reservation" resultMap="ReservationResult">
+		SELECT * FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, GUESTNAME, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM, GUEST
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE AND RESERVE.GUESTID=GUEST.GUESTID) 
+		AND RESERVE.HOTELCODE=#{hotelCode}
+		AND RESERVECHECKOUT &lt; EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 기간별 조회 -->
+		<if test="(reserveCheckin!=null and reserveCheckin!='') and (reserveCheckout!=null and reserveCheckout!='')">
+			AND (RESERVECHECKIN>=#{reserveCheckin} AND RESERVECHECKIN&lt;=#{reserveCheckout}) 
+		</if>
+		
+		<!-- 고객이름 검색-->
+		<if test="guestName != null and guestName!=''">
+			AND GUESTNAME LIKE '%'||#{guestName}||'%'
+		</if>
+		
+		<!-- 객실별 -->
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		ORDER BY RESERVECHECKIN DESC
+		) ALLIAS) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 관리자: 지난 예약 조회 총 개수 조회 쿼리 -->
+	<select id="hotelPastReservationCnt" parameterType="Reservation" resultType="int">
+		SELECT COUNT(*) FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, GUESTNAME, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM, GUEST
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE AND RESERVE.GUESTID=GUEST.GUESTID) 
+		AND RESERVE.HOTELCODE=#{hotelCode}
+		AND RESERVECHECKOUT &lt; EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<!-- 기간별 검색 -->
+		<if test="(reserveCheckin!=null and reserveCheckin!='') and (reserveCheckout!=null and reserveCheckout!='')">
+			AND (RESERVECHECKIN>=#{reserveCheckin} AND RESERVECHECKIN&lt;=#{reserveCheckout}) 
+		</if>
+		
+		<!-- 고객이름별 검색 -->
+		<if test="guestName != null and guestName!=''">
+			AND GUESTNAME LIKE '%'||#{guestName}||'%'
+		</if>
+		
+		<!-- 객실별 검색 -->
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		ORDER BY RESERVECHECKIN DESC
+		) ALLIAS)
+	</select>
+	
+	<!-- 관리자: 예약 현황 조회 -->
+	<select id="hotelReservation" parameterType="Reservation" resultMap="ReservationResult">
+		SELECT * FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, GUESTNAME, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM, GUEST
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE AND RESERVE.GUESTID=GUEST.GUESTID) 
+		AND RESERVE.HOTELCODE=#{hotelCode} 
+		AND RESERVECHECKIN>=EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		<if test="reserveCheckin!=null and reserveCheckin!=''">
+			AND RESERVECHECKIN=#{reserveCheckin}
+		</if>
+		
+		<if test="guestName != null and guestName!=''">
+			AND GUESTNAME LIKE '%'||#{guestName}||'%'
+		</if>
+		
+		ORDER BY RESERVECHECKIN ASC
+		) ALLIAS) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 관리자: 예약 현황 조회 총 개수 조회 쿼리-->
+	<select id="hotelReservationCnt" parameterType="Reservation" resultType="int">
+		SELECT COUNT(*) FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM (
+		SELECT RESERVE.*, GUESTNAME, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM, GUEST
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE AND RESERVE.GUESTID=GUEST.GUESTID) 
+		AND RESERVE.HOTELCODE=#{hotelCode} 
+		AND RESERVECHECKIN>=EXTRACT(YEAR FROM SYSDATE)||'-'||EXTRACT(MONTH FROM SYSDATE)||'-'||EXTRACT(DAY FROM SYSDATE)
+		
+		<if test="roomGrade != null and roomGrade != ''">
+			AND ROOMGRADE=#{roomGrade}
+		</if>
+		
+		<if test="reserveCheckin!=null and reserveCheckin!=''">
+			AND RESERVECHECKIN=#{reserveCheckin}
+		</if>
+		
+		<if test="guestName != null and guestName!=''">
+			AND GUESTNAME LIKE '%'||#{guestName}||'%'
+		</if>
+		
+		ORDER BY RESERVECHECKIN ASC
+		) ALLIAS)
+	</select>
+	
+	<!-- 예약 하나 가져오는 쿼리 -->
+	<select id="getReservation" parameterType="int" resultType="Reservation">
+		SELECT RESERVE.*, HOTELNAME, ROOMNAME, ROOMGRADE, ROOMCOST FROM RESERVATION RESERVE, HOTEL, ROOM 
+		WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) 
+		AND RESERVECODE=#{reserveCode}
+	</select>
+	
+	<!-- 예약 취소 쿼리 -->
+	<delete id="cancelReservation" parameterType="int">
+		DELETE FROM RESERVATION WHERE RESERVECODE=#{reserveCode}
+	</delete>
+	
+	<!-- 리뷰 작성 여부 1로 업데이트하는 쿼리 -->
+	<update id="uploadReview" parameterType="int">
+		UPDATE RESERVATION SET REVIEWSTATUS=1 WHERE RESERVECODE=#{reserveCode}
+	</update>
+	
+	<!-- 내가 방금 결제한 예약번호를 가져오는 쿼리 -->
+	<select id="justPaidReservation" parameterType="String" resultType="int">
+		SELECT MAX(RESERVECODE) FROM RESERVATION RESERVE, HOTEL, ROOM WHERE (RESERVE.HOTELCODE=HOTEL.HOTELCODE AND RESERVE.ROOMCODE=ROOM.ROOMCODE) AND GUESTID=#{guestId}
+	</select>
+
+</mapper>

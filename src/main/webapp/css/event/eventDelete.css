@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#content{
+	/*top:200px;*/
+	width:1890px;
+	margin: 300px auto 200px auto; /* 풋터 겹침 방지를 위해 마진 조정*/
+
+}
+
+#content #form{
+	margin:80px auto;
+	padding:50px;
+	border-radius:20px;
+	border:3px solid #e9b8bc;
+}
+#content #form th{
+	padding:30px 50px 100px 50px;
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color : #705c5c;
+	text-align: center;
+}
+#content #form #banner{
+	width: 1200px;
+	border-radius: 10px;
+}
+#content #form #buttons{
+	text-align: center;
+	padding-top: 100px;
+}
+#content #form #buttons .button{
+	background-color: #ca7a85;
+	border-radius:5px;
+	color:white;
+	border:1px;
+	width:150px;
+	height:40px;
+	font-size: 1.3em;
+	cursor: pointer; /* 손모양 마우스 포인터 */
+}

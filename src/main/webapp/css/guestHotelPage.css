@@ -1,0 +1,226 @@
+/* 
+	[찬양] 호텔 소개 부분에 적용되는 CSS (호텔소개, 예약폼, 예약가능객실 화면까지 공통 적용) 
+	hotel/guestHotelPage.jsp
+	reservation/searchRoomForm.jsp
+	reservation/availableRoom.jsp
+*/
+@charset "UTF-8";
+
+#content{
+	width:1300px; margin:240px auto; overflow: hidden;
+}
+
+#leftMenu{
+	width:180px; float: left; margin-right: 30px;
+}
+
+#leftMenu ul{
+	list-style: none;
+}
+
+#leftMenu ul li{
+	height: 50px; 	
+	text-align:center; 
+	line-height:50px; 
+	background-color:#eac49d; 
+	font-size: 1.5em; 
+	border-bottom: 1px white solid;
+}
+
+#leftMenu ul li a{
+	text-decoration: none; 
+	color:#c2796b; 
+	display:block; 
+}
+
+#leftMenu ul li:hover{
+	background-color:#db9478; 
+	font-weight: bold; 
+}
+
+#leftMenu ul li a:hover{
+	color:#f1f0d1; 
+	display: block; 
+}
+
+#hotelInfo{
+	width:83%; /* [은실] 호텔 소개 페이지 너비를 조금 더 넓게 조정 */
+	float: left;
+}
+
+/* 썸네일 이미지 크기가 일정하도록 너비와 높이 고정했습니다~ */
+.mainImgH{
+	width:900px;
+	height: 600px;
+}
+
+.thumbnailH{
+	width:280px;
+	height: 190px;
+	margin: 10px;
+}
+
+[id^=tabs-]>table table {
+	width: 100%;
+	text-align: center;
+
+
+}
+.mainImgRoom {
+	width:900px;
+	height: 640px;
+}
+
+.thumbnailRoom {
+	width:175px;
+	height: 137px; 
+	
+}
+
+h1 { /* 호텔명 */
+	font-size: 3em;
+}
+hr { /* 괘선 */
+	margin: 10px 0;
+}
+h2 { /* 각 항목 제목 부분*/
+	margin-top: 25px;
+	margin-left: 10px;
+}
+h3 { /* 각 항목 내용 부분 */
+	padding: 10px;
+	font-weight: 100;
+	line-height: 1.8em;
+}
+
+#map, table { /* 지도, 사진 영역 */
+	margin: 20px auto;
+
+}
+
+#btnReservation {
+	width: 100%;
+	height: 60px;
+	border: 0;
+	margin: 10px 0;
+	background-color: #74442d;
+	color: white;
+	font-size: 1.1em;
+	outline: none;
+	cursor: pointer;
+}
+
+/* [은실] 입력폼들 테두리에 파란색 그림자 전부 없애기 */
+input {
+	outline: none;
+}
+
+/* [은실] 리뷰 프레임 영역 */
+iframe {
+	width: 100%;
+	border: 0;
+	overflow: auto;
+	min-height: 800px;
+}
+
+/* [은실] 별점 출력 영역 */
+#scoreImg {
+	display: inline-block;
+	height: 58px;
+	background-image: url('/hotel/img/star.png');
+}
+
+/* [은실] 예약 탭 객실 썸네일 영역 */
+.roomThumbnail {
+	width: 200px;
+	height: 150px;
+}
+
+/* [은실] 예약 가능한 방 검색 폼 영역 */
+#searchRoomTable {
+	width: 90%; /* 너비 조금 늘리고 */
+	margin: 20px auto; /* 가운데 정렬 */
+	padding: 30px;
+	border: 3px solid #74442d;
+}
+
+#searchRoomForm th {
+	font-size: 1.5em;
+	text-align: left;
+	padding-left: 60px;
+}
+
+#searchRoomForm td {
+	text-align: center;
+}
+
+#searchRoomForm [name="reserveCheckin"],
+#searchRoomForm [name="reserveCheckout"] {
+	width: 200px;
+	height: 30px; 
+	font-size: 1.5em;
+	margin: 10px 0;
+	padding-left: 10px;
+	
+}
+#searchRoomForm [name="roomLimit"] {
+	width: 200px;
+	height: 32px;
+	margin: 10px 0;
+	font-size: 1.5em;
+	padding: 0 12px;
+
+}
+#searchRoomForm [type="submit"] {
+	width: 200px;
+	height: 40px;
+	border: 0;
+	background-color: #74442d;
+	color: white;
+	font-size: 1.2em;
+	margin-top:25px;
+	outline: none;
+	
+}
+
+.ui-datepicker-trigger {
+	margin-bottom: -10px; 
+	cursor: pointer;
+}
+
+/* 예약 가능한 방 목록 CSS (availableRoom.jsp) */
+.availableRoomList {
+	width: 100%;
+}
+
+.availableRoomList tr td.roomThumbnailCell {
+	width: 200px;
+}
+
+.availableRoomList .roomInfoCell {
+	width: 900px;
+	background-color: #eeeeee;
+	padding: 20px;
+}
+
+.availableRoomList .roomInfoCell .roomNamePhrase {
+	font-weight: bold;
+	font-size: 1.5em;
+
+}
+.availableRoomList .roomInfoCell .roomPricePhrase {
+	
+	font-size: 1.1em;
+
+}
+.availableRoomList tr td:last-child button {
+	width: 150px;
+	height: 160px;
+	background-color: #ca7a85;
+	color: white;
+	font-size: 1.3em;
+	border: 0;
+	border-radius: 10px;
+}
+
+

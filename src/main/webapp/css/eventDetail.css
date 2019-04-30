@@ -1,0 +1,67 @@
+@charset "UTF-8";
+#headerTopic{
+	position:fixed;
+   	top:90px;
+   	right:700px;
+   	z-index: 100;
+   	color:white;
+   	font-family: 'Rubik', sans-serif;
+    font-size:3em;
+}
+#content{
+	/*top:200px;*/
+	width:1890px;
+	margin: 200px auto 100px auto; /* 풋터 겹침 방지를 위해 마진 조정*/
+
+}
+
+#content #eventDetail{
+	margin:80px auto;
+	padding:50px;
+	border-radius:20px;
+	border:3px solid #e9b8bc;
+}
+#content #eventDetail th{
+	padding:10px 0px;
+	font-size: 2em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color : #705c5c;
+	background-color:#e9b8bc;
+	background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 1%, rgba(233,184,188,0.54) 20%, rgba(233,184,188,1) 37%, rgba(233,184,188,1) 38%, rgba(233,184,188,1) 68%, rgba(233,184,188,0.47) 85%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.03) 1%,rgba(233,184,188,0.54) 20%,rgba(233,184,188,1) 37%,rgba(233,184,188,1) 38%,rgba(233,184,188,1) 68%,rgba(233,184,188,0.47) 85%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.03) 1%,rgba(233,184,188,0.54) 20%,rgba(233,184,188,1) 37%,rgba(233,184,188,1) 38%,rgba(233,184,188,1) 68%,rgba(233,184,188,0.47) 85%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+}
+#content #eventDetail #eventBanner{
+	margin-top: 50px;
+}
+#content #eventDetail td{
+	padding:10px;
+}
+#content #eventDetail td img{
+	width: 1200px;
+	border-radius: 10px;
+}
+#content #eventDetail #info{
+	margin-top:30px;
+	border-radius:10px;
+	border:1px solid #f2d5d7;
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.5em;
+	height:200px;
+}
+#content #eventDetail #buttons{
+	text-align: center;
+	padding-top: 30px;
+}
+#content #eventDetail #buttons button{
+	background-color: #ca7a85;
+	border-radius:5px;
+	color:white;
+	border:1px;
+	width:90px;
+	height:40px;
+	font-size: 1.5em;
+	cursor: pointer; /* 손모양 마우스 포인터 */
+}

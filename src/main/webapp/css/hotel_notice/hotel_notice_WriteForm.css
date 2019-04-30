@@ -1,0 +1,134 @@
+/* 페이지 전체 틀 CSS */
+@charset "UTF-8";
+
+/* [은실] frame.css 공통 적용을 위해서 기존 속성은 주석처리합니다. */
+/* 페이지 전체 틀 */
+/* #section{
+	margin:0 auto;
+	width:1890px;
+	overflow:hidden;
+} */
+
+/* 내용물 영역 CSS */
+
+/* #section #contentArea {
+	margin:200px 0px 0px 50px;
+	float:left;
+} */
+
+/* [은실] */
+#section #contentArea #content {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#section #contentArea #topic { /* 게시판 제목 */
+	width:240px;
+	font-family: 'Rubik', sans-serif;
+	font-size:2em;
+	color:#5b5b5b;
+	margin-bottom: 30px;	
+}
+
+#section #contentArea #board { /* 게시판 */
+	width:1060px;
+	border:5px solid #eac49d;
+	/* border-left:5px solid #eac49d;
+	border-right:5px solid #eac49d; */
+	border-radius: 20px; /* 모서리 곡률 조정 (td쪽 모서리 곡률도 10px로 조정했습니다) */
+	-webkit-border-horizontal-spacing: 0;
+	border-spacing:0;
+	margin-left:20px;
+}
+#section #contentArea #board #id_titleInput td{
+	background-color:#eac49d;
+}
+#section #contentArea #board #id_titleInput #radius1{
+	border-radius: 10px 0 0 0;
+}
+#section #contentArea #board #id_titleInput #radius2{
+	border-radius: 0 10px 0 0;
+}
+#section #contentArea #board tr .item{
+	width:150px;
+	height:50px;
+	text-align:center;
+}
+#section #contentArea #board tr .item span{
+	/* color:#db9478; */
+	font-size:1.3em;
+}
+#section #contentArea #board tr .item_input input{
+	width:270px;
+	height:20px;
+	margin:5px;
+	border:2px solid #db9478;
+	padding:5px;
+	font-size:1.1em;
+}
+
+#section #contentArea #board tr td .file_name{
+	background-color: white;
+	width:270px;
+	height:20px;
+	padding:5px;
+	border:2px solid #db9478;
+	vertical-align: middle;	
+	font-size:1.05em;
+}
+#section #contentArea #board #file_area td{
+	font-size: 1.3em;
+	height:50px;
+}
+#section #contentArea #board #file_area #file_span{
+	text-align:center;
+}
+#section #contentArea #board #file_area td span{
+	/* color:#db9478; */
+}
+#section #contentArea #board #file_area td .noticeFile{
+	display:none;
+}
+#section #contentArea #board #file_area td label{
+	display:inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+}
+#section #contentArea #board #file_area td label img{
+	width:33px;
+	vertical-align: middle;
+}
+#section #contentArea #board #button_area #eventRegisterBtn{
+	width:200px;
+	height:30px;
+	margin:15px 0;
+	margin-left:790px;
+}
+#section #contentArea #board #button_area #eventRegisterBtn input{
+	height:30px;
+	width:55px;
+	float:right;
+	margin-left:5px;
+	background-color:#eac49d;
+	color:white;
+	border:1px solid #eac49d;
+	cursor: pointer;
+}
+/* 일러스트 영역 CSS */
+#section #illustArea{
+	position: relative;
+	margin:200px 0px 0px 50px;
+	float: right;
+}
+
+#section #illustArea #illust{
+	position: fixed;
+	top:130px;
+	right:50px;
+	width:550px;
+	height:650px;
+}
+
+#eventContent #content2 #illust img{
+}

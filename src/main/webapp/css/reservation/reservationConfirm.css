@@ -1,0 +1,74 @@
+/* 결제 확인 페이지 */
+@charset "UTF-8";
+
+#payForReserveInfo,
+#reservationTable {
+    margin: 0 auto;
+    width: 600px;
+    height: 400px;
+}
+
+#payForReserveInfo th,
+#reservationTable th {
+    background-color: #d6959b;
+    color: black;
+    font-size: 1.2em;
+
+}
+
+#reservationTable caption {
+    font-size: 2em;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+#payForReserveInfo td,
+#reservationTable td {
+    background-color: #eeeeee;
+    color: black;
+    padding: 0 20px;
+    
+}
+
+fieldset {
+    text-align: center;
+    margin: 50px;
+}
+
+legend {
+    font-size: 2em;
+}
+
+fieldset table {
+    margin: 20px auto;
+
+}
+fieldset table th {
+    padding-bottom: 15px;
+}
+fieldset table input[type=text] {
+    height: 30px;
+    width: 235px;
+    font-size: 1.1em;
+    padding-left: 8px;
+}
+
+#paidDiv {
+    text-align: center;
+}
+
+#paidDiv p {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#paidDiv input[type=submit] {
+    width: 500px;
+    height: 60px;
+    margin: 40px;
+    background-color: #ca7a85;
+    border: 0;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 5px;
+}

@@ -1,0 +1,32 @@
+/* 고객센터 글목록  CSS */
+@charset "UTF-8";
+/* [은실] */
+#section #contentArea #content {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+#content table{
+	width: 1060px;
+	margin: 0 0 0 20px;
+	border-radius: 20px;
+	border:5px solid #eac49d;
+	-webkit-border-horizontal-spacing: 0;
+	border-spacing:0;
+	}
+#content #mySupport{width:960px;}
+.line{background-color:#eac49d;}
+.line th{  padding: 5px;}
+.line th:nth-child(1) {border-radius: 10px 0 0 0;/* color:  blue; */}
+.line th:nth-child(5) {border-radius: 0 10px 0 0;}
+caption{text-align: left; font-size: 2em; color: #74442d; font-weight: bold; padding: 0 0 10px 0;}
+#content table{font-size: 1.3em;}
+#content table tr td:nth-child(1) {width: 10%; text-align: center; border-bottom: 1px solid #eac49d;}
+#content table tr td:nth-child(2) {width: 10%; text-align: center; border-bottom: 1px solid #eac49d; }
+#content table tr td:nth-child(3) {width: 40%; padding: 5px; border-bottom: 1px solid #eac49d;}
+#content table tr td:nth-child(4) {width: 25%; text-align: center; border-bottom: 1px solid #eac49d;}
+#content table tr td:nth-child(5) {width: 15%; text-align: center; border-bottom: 1px solid #eac49d;}
+#content table tr:not(.line):not(.lastLine):hover{background-color:#e9e8ca; cursor:pointer;}
+#content table tr:nth-last-child(1) td{border: 0px; text-align: right; padding: 5px 30px 5px 5px;}
+#content table tr:nth-last-child(1) td a{text-decoration: none; color: #c2796b;}
+#page{width: 900px; margin: 0 0 0 50px; text-align: center;}

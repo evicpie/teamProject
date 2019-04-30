@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+*{	padding:0;
+		margin:0;}
+	a{text-decoration: none;}
+	li{list-style: none;}
+	
+	#remote{
+		position:fixed;
+		width:122px;
+		height:100px;
+		line-height:100px;
+		bottom:50px;
+		right: 0;
+		overflow: hidden;
+		z-index: 99; /* [은실] 리모컨이 맨 위에 오도록 z-index를 큰 값으로 설정 */
+		
+		/* [은실] 영역 축소 애니메이션 */
+		animation-name: remoteAreaContract;
+		animation-duration:2s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+	}
+	
+	#remote div {
+		display:inline-block;
+		float: right;
+	}
+	#remote #button0{
+		position:relative;
+		right:0px;
+		margin:0px 25px;
+		width:100px;
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		z-index: 100;
+		animation-name: button0_ani_back;
+		animation-duration:1s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+		cursor: pointer; /* [은실] 메뉴버튼에 마우스를 올리면 손 모양 커서가 나타나도록 하여 클릭하는 부분임을 알림 */
+	}
+	
+	#remote #button0 img{
+		width:100px;
+		height:100px;
+	}
+	@keyframes button0_ani{
+		from{
+			transform:rotate(360deg);
+		}
+		to{
+			transform:rotate(0deg);
+		}
+	}
+	
+	@keyframes button0_ani_back{
+		from{
+			transform:rotate(0deg);
+		}
+		to{
+			transform:rotate(360deg);
+		}
+	}
+	#remote #button1{
+		position:relative;
+		right:-150px;
+		margin:0px 25px;
+		width:100px;
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		animation-name: button1_ani_back;
+		animation-duration:1s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+	}
+	#remote #button1 img{
+		width:100px;
+		height:100px;
+	}
+	@keyframes button1_ani{
+		from{
+			right:-150px;
+			transform:rotate(360deg);
+		}
+		to{
+			right:10px;
+			transform:rotate(0deg);
+		}
+	}
+	
+	@keyframes button1_ani_back{
+		from{
+			right:10px;
+			transform:rotate(0deg);
+		}
+		to{
+			right:-150px;
+			transform:rotate(360deg);
+		}
+	}
+	
+	#remote #button2{
+		position:relative;
+		right:-300px;
+		margin:0px 25px;
+		width:100px;
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		animation-name: button2_ani_back;
+		animation-duration:1s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+	}
+	#remote #button2 img{
+		width:100px;
+		height:100px;
+	}
+	@keyframes button2_ani{
+		from{
+			right:-300px;
+			transform:rotate(360deg);
+		}
+		to{
+			right:20px;
+			transform:rotate(0deg);
+		}
+	}
+	
+	@keyframes button2_ani_back{
+		from{
+			right:20px;
+			transform:rotate(0deg);
+		}
+		to{
+			right:-300px;
+			transform:rotate(360deg);
+		}
+	}
+	#remote #button3{
+		position:relative;
+		right:-450px;
+		margin:0px 25px;
+		width:100px;
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		animation-name: button3_ani_back;
+		animation-duration:1s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+	}
+	#remote #button3 img{
+		width:100px;
+		height:100px;
+	}
+	@keyframes button3_ani{
+		from{
+			right:-450px;
+			transform:rotate(360deg);
+		}
+		to{
+			right:30px;
+			transform:rotate(0deg);
+		}
+	}
+	
+	@keyframes button3_ani_back{
+		from{
+			right:30px;
+			transform:rotate(0deg);
+		}
+		to{
+			right:-450px;
+			transform:rotate(360deg);
+		}
+	}
+	#remote #button4{
+		position:relative;
+		right:-600px;
+		margin:0px 25px;
+		width:100px;
+		height:100px;
+		line-height:100px;
+		text-align:center;
+		animation-name: button4_ani_back;
+		animation-duration:1s;
+		animation-iteration-count:initial;
+		animation-direction:alternate;
+	}
+	#remote #button4 img{
+		width:100px;
+		height:100px;
+	}
+	@keyframes button4_ani{
+		from{
+			right:-600px;
+			transform:rotate(360deg);
+		}
+		to{
+			right:40px;
+			transform:rotate(0deg);
+		}
+	}
+	
+	@keyframes button4_ani_back{
+		from{
+			right:40px;
+			transform:rotate(0deg);
+		}
+		to{
+			right:-600px;
+			transform:rotate(360deg);
+		}
+	}
+	
+	/* 리모콘 영역 축소 */
+	@keyframes remoteAreaContract {
+		from{
+			width: 800px;
+		}
+		to {
+			width: 122px;
+		}
+	}
+	
+	@keyframes remoteAreaContract_back {
+		from{
+			width: 122px;
+		}
+		to {
+			width: 800px;
+		}
+	}
+	
+	
+}

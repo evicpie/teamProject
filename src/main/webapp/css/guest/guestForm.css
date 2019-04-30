@@ -1,0 +1,75 @@
+/* 회원가입 & 회원정보 수정 폼 */
+/*
+	guest/joinForm.jsp
+	guest/modifyForm.jsp
+*/
+@charset "UTF-8";
+
+#content {
+	min-height: 700px;
+}
+
+#content table {
+	margin: 0 auto;
+
+}
+
+#content table td {
+	padding: 10px;
+}
+
+#content table td input[type=text],
+#content table td input[type=password],
+#content table td input[type=number]:not([name^=temp]) {
+	width: 375px;
+	height: 40px;
+	font-size: 1.2em;
+	padding: 0 5px;
+}
+
+
+#content table input[name^=temp] {
+	width: 104px;
+	height: 40px;
+	font-size: 1.2em;
+	padding: 0 5px;
+}
+
+#content table tr td:first-child {
+	text-align: right;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#content table tr:last-child td {
+	text-align: center;
+}
+
+#content table td input[type=button],
+#content table td input[type=submit] {
+	width: 100px;
+	height: 42px;
+	border: 0;
+	border-radius: 5px;
+	background-color: #9e6075;
+	color: white;
+}
+
+#content table td input[type=submit] {
+	width: 500px;
+	margin: 30px;
+}
+
+#content table td input[type=submit][value="수정"],
+#content table td input[type=button][value="회원탈퇴"]
+ {
+	width: 250px;
+	margin: 30px 5px;
+}
+
+.ui-datepicker-trigger {
+	height: 45px;
+	bottom: -15px;
+	left: 2px;
+}
+
+

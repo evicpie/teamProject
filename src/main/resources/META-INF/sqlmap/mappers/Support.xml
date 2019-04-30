@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Support">
+	<resultMap type="Support" id="SupportResult">
+		<result column="supportCode" property="supportCode"/>
+		<result column="guestId" property="guestId"/>
+		<result column="adminId" property="adminId"/>
+		<result column="supportTitle" property="supportTitle"/>
+		<result column="supportContent" property="supportContent"/>
+		<result column="supportFile" property="supportFile"/>
+		<result column="supportDate" property="supportDate"/>
+		<result column="supportIp" property="supportIp"/>
+		<result column="supportGroup" property="supportGroup"/>
+		<result column="supportStep" property="supportStep"/>
+		<result column="supportIndent" property="supportIndent"/>
+	</resultMap>
+	<select id="supportListPaging" parameterType="Support" resultMap="SupportResult">
+		SELECT * FROM 
+        (SELECT ROWNUM RN, A.* FROM
+        (SELECT * FROM SUPPORT ORDER BY SUPPORTGROUP DESC, SUPPORTSTEP) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	<select id="supportTotal" resultType="int">
+		SELECT COUNT(*) FROM SUPPORT
+	</select>
+	<select id="supportDetail" parameterType="int" resultType="Support">
+		SELECT * FROM SUPPORT WHERE SUPPORTCODE=#{supportCode}
+	</select>
+	<insert id="supportWrite" parameterType="Support">
+		<if test="supportFile!=''">
+			INSERT INTO SUPPORT (SUPPORTCODE, GUESTID, SUPPORTTITLE, SUPPORTCONTENT, SUPPORTFILE
+	        , SUPPORTDATE, SUPPORTIP, SUPPORTGROUP, SUPPORTSTEP, SUPPORTINDENT)
+	    	VALUES (SUPPORT_SEQ.NEXTVAL, #{guestId}, #{supportTitle}, #{supportContent}, #{supportFile}, SYSDATE, #{supportIp}, SUPPORT_SEQ.CURRVAL, 0, 0)
+		</if>
+		<if test="supportFile==''">
+			INSERT INTO SUPPORT (SUPPORTCODE, GUESTID, SUPPORTTITLE, SUPPORTCONTENT
+	        , SUPPORTDATE, SUPPORTIP, SUPPORTGROUP, SUPPORTSTEP, SUPPORTINDENT)
+	    	VALUES (SUPPORT_SEQ.NEXTVAL, #{guestId}, #{supportTitle}, #{supportContent}, SYSDATE, #{supportIp}, SUPPORT_SEQ.CURRVAL, 0, 0)
+		</if>
+	</insert>
+	<update id="supportModify" parameterType="Support">
+		UPDATE SUPPORT SET SUPPORTTITLE=#{supportTitle},
+                           SUPPORTCONTENT=#{supportContent},
+                           <if test="supportFile!=''">
+                           SUPPORTFILE=#{supportFile},
+                           </if>
+                           SUPPORTDATE=SYSDATE,
+                           SUPPORTIP=#{supportIp}
+                     WHERE SUPPORTCODE=#{supportCode}
+	</update>
+	<delete id="supportDelete" parameterType="int">
+		DELETE FROM SUPPORT WHERE SUPPORTCODE=#{supportCode}
+	</delete>
+	<update id="supportDoA" parameterType="Support">
+		UPDATE SUPPORT SET SUPPORTSTEP = SUPPORTSTEP + 1
+    		WHERE SUPPORTGROUP = #{supportGroup} AND SUPPORTSTEP>#{supportStep}
+	</update>
+	<insert id="supportReply" parameterType="Support">
+		<if test="supportFile!=''">
+			INSERT INTO SUPPORT (SUPPORTCode, GUESTID, ADMINID, SUPPORTTitle, SUPPORTContent, SUPPORTFile, SUPPORTDATE, SUPPORTIp, SUPPORTGroup, SUPPORTStep, SUPPORTIndent)
+	    	VALUES (SUPPORT_SEQ.NEXTVAL, #{guestId}, #{adminId}, #{supportTitle}, #{supportContent}, #{supportFile}, SYSDATE, #{supportIp}, #{supportGroup}, #{supportStep}, #{supportIndent})
+		</if>
+		<if test="supportFile==''">
+			INSERT INTO SUPPORT (SUPPORTCode, GUESTID, ADMINID, SUPPORTTitle, SUPPORTContent, SUPPORTDATE, SUPPORTIp, SUPPORTGroup, SUPPORTStep, SUPPORTIndent)
+	    	VALUES (SUPPORT_SEQ.NEXTVAL, #{guestId}, #{adminId}, #{supportTitle}, #{supportContent}, SYSDATE, #{supportIp}, #{supportGroup}, #{supportStep}, #{supportIndent})
+		</if>
+	</insert>
+	<select id="mySupportTotal" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM SUPPORT WHERE guestId=#{guestID}
+	</select>
+	<select id="mySupportList" parameterType="Support" resultMap="SupportResult">
+		SELECT * FROM 
+        (SELECT ROWNUM RN, A.* FROM
+        (SELECT * FROM SUPPORT  WHERE guestID=#{guestId} ORDER BY SUPPORTGROUP DESC, SUPPORTSTEP) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+</mapper>

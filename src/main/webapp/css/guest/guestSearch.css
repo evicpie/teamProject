@@ -1,0 +1,210 @@
+/* 페이지 전체 틀 CSS */
+@charset "UTF-8";
+
+/* [은실] frame.css 공통 적용을 위해서 기존 속성은 주석처리합니다. */
+/* 페이지 전체 틀 */
+/* #section{
+	margin:0 auto;
+	width:1890px;
+	overflow:hidden;
+} */
+
+/* 내용물 영역 CSS */
+
+/* #section #contentArea {
+	margin:200px 0px 0px 50px;
+	float:left;
+} */
+
+#section #contentArea #topic { /* 게시판 제목 */
+	width:200px;
+	font-family: 'Rubik', sans-serif;
+	font-size:2em;
+	color:#5b5b5b; 
+	margin-bottom: 30px;	
+}
+
+/* [은실] */
+#section #contentArea #content {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+#section #contentArea #board { /* 게시판 */
+	width:1060px;
+	border:5px solid #eac49d;
+	/* border-left:5px solid #eac49d;
+	border-right:5px solid #eac49d; */
+	border-radius: 20px;
+	-webkit-border-horizontal-spacing: 0;
+	border-spacing:0;
+	margin-left:20px;
+}
+
+#section #contentArea #board #table_item td{
+	background-color:#eac49d;
+	font-size:1.5em;
+	margin:0;
+	height:50px;
+	text-align:center;
+}
+
+#section #contentArea #board #table_item #item_ID{
+	border-radius: 10px 0 0 0;
+	width:150px;
+}
+#section #contentArea #board #table_item #item_NAME{
+	width:150px;
+}
+#section #contentArea #board #table_item #item_PHONE{
+	width:210px;
+}
+#section #contentArea #board #table_item #item_BIRTH{
+	width:150px;
+}
+#section #contentArea #board #table_item #item_POINT{
+	width:150px;
+}
+#section #contentArea #board #table_item #item_STATUS{
+	width:100px;
+}
+#section #contentArea #board #table_item #item_CHECK{
+	border-radius: 0 10px 0 0;
+	width:150px;
+}
+#section #contentArea #board .table_detail td {
+	border-bottom:1px solid #eac49d;
+	height:65px;
+	font-size:1.3em;
+	text-align:center;
+}
+#section #contentArea #board .table_detail td a{
+	color:black;
+}
+#section #contentArea #board .table_detail .detail_TITLE{
+	text-align:left;
+}
+input[type="checkbox"]{
+	display:none;
+}
+
+input[type="checkbox"] + label{
+	display:inline-block;
+	width:20px;
+	height:20px;
+	border: 2px solid #eac49d;
+	vertical-align:middle;
+	cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label{
+	background-color: #db9478;
+}
+
+#section #contentArea #board #button_area #eventRegisterBtn{
+	width:400px;
+	height:30px;
+	margin:15px 0;
+	margin-left:600px;
+}
+#section #contentArea #board #button_area #eventRegisterBtn input{
+	height:30px;
+	width:90px;
+	float:right;
+	margin-left:5px;
+	background-color:#eac49d;
+	color:white;
+	border:1px solid #eac49d;
+	cursor: pointer;
+}
+
+#section #contentArea #paging { /* 페이징 처리 부분 */
+	text-align: center;
+	margin:0 auto;
+	font-size:1.3em;
+}
+#section #contentArea #paging b{
+	font-size:1.6em;
+	color:#db9478;
+}
+#section #contentArea #paging a{
+	color:#db9478;
+	text-decoration: none;
+}
+
+#section #contentArea #paging #currentPage { /* 페이징 처리 부분 - 현재 페이지는 큰글씨로 */ 
+	color:#db9478;
+	font-size: 2em;
+}
+
+#section #contentArea #paging #notCurrent { /* 페이징 처리 부분 - 다른 페이지는 작은글씨로 */ 
+	color:#db9478;
+	font-size: 1.5em;
+}
+
+
+#section #contentArea #eventRegisterBtn { /* (이벤트) 등록 버튼 위치 */
+	margin:50px 50px 0 50px;
+	text-align: right;
+}
+
+#section #contentArea #eventRegisterBtn img { /* (이벤트) 등록 버튼 사이즈 */
+	width:100px;
+	height:100px;
+}
+#section #board #search_area{
+	height:70px;
+	border:1px solid red;
+	text-align: center;
+}
+#section #board #search_area select{
+	border:2px solid #db9478;
+	height:35px;
+	font-size:1.3em;
+	vertical-align:middle;
+}
+#section #board #search_area input[type=text]{
+	border:2px solid #db9478;
+	border-right:none;
+	width:300px;
+	height: 31px;
+	font-size:1.3em;
+	vertical-align:middle;
+	padding-left:3px;
+}
+#section #board #search_area input[type=submit]{
+	display:none;
+}
+#section #board #search_area label{
+	cursor: pointer;
+}
+#section #board #search_area label img{
+	width:31.5px;
+	height: 31.5px;
+	border:2px solid #db9478;
+	border-left:none;
+	vertical-align:middle;
+	margin-left:-7px;
+}
+#section #board #search_area #search{
+	display:inline-block;
+}
+
+/* 일러스트 영역 CSS */
+#section #illustArea{
+	position: relative;
+	margin:200px 0px 0px 50px;
+	float: right;
+}
+
+#section #illustArea #illust{
+	position: fixed;
+	top:130px;
+	right:0px;
+	width:550px;
+	height:650px;
+}
+
+#eventContent #content2 #illust img{
+}   

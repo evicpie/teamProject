@@ -1,0 +1,48 @@
+/* 로그인 폼 CSS */
+@charset "UTF-8";
+
+#section #contentArea #content {
+	height:350px;
+	margin-top: 240px;
+	
+}
+
+#section #contentArea #content table {
+	margin: 30px auto;
+	-webkit-border-horizontal-spacing: 0;
+	-webkit-border-vertical-spacing: 0;
+
+
+}
+
+#section #contentArea #content table caption {
+	padding: 25px;
+	font-size: 2em;
+	font-family: 'Rubik', sans-serif;
+	
+}
+
+#section #contentArea #content table input:not([type=submit]) {
+	width: 200px;
+	height: 30px;
+	margin: 0 10px;
+}
+
+
+#section #contentArea #content table input[type=submit] {
+	width: 96.5%;
+	border: 0;
+	height: 40px;
+	background-color: #74444d;
+	color: white;
+}
+
+#section #contentArea #findIdPw {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#section #contentArea #content a {
+	text-decoration: none;
+	text-align: center;
+}

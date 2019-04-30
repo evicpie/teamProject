@@ -1,0 +1,180 @@
+@charset "UTF-8";
+/* review/reviewFrame.css */
+* {
+	outline: none;
+}
+body {
+	overflow-x: hidden; /* 가로 스크롤 숨김*/
+}
+section {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	
+}
+
+#reviewList {
+	margin: 0 auto;
+}
+
+#btnMoreReview {
+	width: 950px;
+	height: 50px;
+	border: 0;
+	border-bottom: 1px solid gray;
+	color: #58585a;
+	font-size: 1.2em;
+	outline: none;
+	cursor: pointer;
+	
+}
+
+
+
+/* css about reviewList.jsp */
+section [id^=review] {
+	width: 950px;
+	-webkit-border-horizontal-spacing: 0;
+	text-align: left;
+}
+
+section [id^=review] .reviewImgCell {
+	width: 30%;
+	text-align: center;
+	border-bottom: 1px solid #74442d;
+}
+
+section [id^=review] .reviewContentCell {
+	width: 70%;
+	padding: 10px;
+	border-bottom: 1px solid #74442d;
+}
+
+section [id^=review] .reviewContentCell p {
+	margin: 10px auto;
+}
+
+section [id^=review] .reviewTitle {
+	font-weight: bold;
+	font-size: 1.2em;
+	
+
+}
+
+section [id^=review] .reviewScore {
+	height: 20px;
+	background-image: url('/hotel/img/smallstar.png');
+	
+}
+
+section [id^=review] .reviewContent {
+	min-height: 70px;
+
+}
+section [id^=review] .reviewDate {
+	font-size: 0.95em;
+	color: #58585a;
+}
+
+section [id^=review] .buttons * {
+	padding: 2px 5px;
+	color: #74442d;
+	background-color: transparent;
+	border: 0;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+
+/* css about commentList */
+section [id^=review] .writeCommentFormRow td {
+	height: 60px;
+	position: relative;
+
+}
+section [id^=review] .writeCommentFormRow td textarea {
+	width: 80.2%;
+	height: 70px;	
+}
+
+section [id^=review] .writeCommentFormRow td [type=submit] {
+	width: 18.5%;
+	height: 77px;
+	position: relative;
+	top: -32px;
+	left: -6px;
+	background-color: #c2796b;
+	border: 0;
+	color: white;
+	font-family
+}
+
+/* CSS for comment area */
+
+section [id^=comment] {
+	border-bottom: 1px solid #a6a7ab;
+	margin: 0 15px;
+}
+section [id^=comment] .commentWriter {
+	font-weight: bold;
+}
+
+section [id^=comment] .commentDate {
+	margin: 0 10px;
+	color: #58585a;	
+}
+
+section [id^=comment] .cmtButtons button {
+	width: 42px;
+	height: 22px;
+	background-color: #a6a7ab;
+	color: white;
+	border: 0;
+	cursor: pointer;
+
+}
+
+section [id^=comment] .cmtContentArea {
+	margin-bottom: 20px;
+	
+}
+
+.showMoreCommentBtnRow td {
+	text-align: center;
+}
+.showMoreCommentBtnRow button {
+	width: 97%;
+	height: 40px;
+	border: 0;
+	background-color: white;
+	border-bottom: 1px solid #a6a7ab;
+	color: #58585a;
+	
+}
+
+.modifyCommentForm textarea,
+.replyCommentForm textarea {
+
+	width: 90%;
+	height: 60px;
+}
+
+.modifyCommentForm [type="submit"],
+.replyCommentForm [type="submit"] {
+	width: 8%;
+	height: 67px;
+	position: relative;
+	top: -27px;
+	left: -7px;
+	border: 0;
+	background-color: #a6a7ab;
+	cursor: pointer;
+	color: white;
+
+}
+
+/* 사진 첨부 input 요소 숨기기 */ 
+#rvFileName {
+    display: none;
+
+}

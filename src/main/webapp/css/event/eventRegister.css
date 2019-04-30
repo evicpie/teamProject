@@ -1,0 +1,91 @@
+@charset "UTF-8";
+#headerTopic{
+	position:fixed;
+   	top:90px;
+   	right:700px;
+   	z-index: 100;
+   	color:white;
+   	font-family: 'Rubik', sans-serif;
+    font-size:3em;
+}
+body{
+	padding-top: 200px;
+}
+#content{
+	/*top:200px;*/
+	width:1890px;
+	margin: 100px auto 200px auto; /* 풋터 겹침 방지를 위해 마진 조정*/
+
+}
+
+#content #form{
+	margin:80px auto;
+	padding:50px;
+	border-radius:20px;
+	border:3px solid #e9b8bc;
+}
+#content #form th{
+	padding:10px 50px;
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color : #705c5c;
+	text-align: center;
+}
+#content #form #title input{
+	width:350px;
+	height:40px;
+	border:1px solid #e9b8bc;
+	background-color: white;
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.2em;
+	color:#808080;
+}
+#content #form img{
+	width:40px;
+	top:14px;
+}
+#content #form td{
+	padding:10px 100px;
+	line-height: 40px;
+	width:350px;
+}
+#content #form td input{
+	width:300px;
+	height:40px;
+	border:1px solid #e9b8bc;
+	background-color: white;
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.2em;
+	color:#808080;
+}
+#content #form #info{
+	margin-top:30px;
+	border-radius:10px;
+	border:2px solid #e9b8bc;
+	font-family: 'Rubik', sans-serif;
+	font-size: 1.3em;
+	color:#808080;
+	width:350px;
+	height:200px;
+}
+#content #form .onOff{
+	width:100px;
+}
+#content #form #plusPoint input{
+	text-align: right;
+}
+#content #form #buttons{
+	text-align: center;
+	padding-top: 30px;
+}
+#content #form #buttons #button{
+	background-color: #ca7a85;
+	border-radius:5px;
+	color:white;
+	border:1px;
+	width:150px;
+	height:40px;
+	font-size: 1.3em;
+	cursor: pointer; /* 손모양 마우스 포인터 */
+}

@@ -1,0 +1,100 @@
+/* myPastReservation.jsp CSS - 나의 지난 예약 */
+@charset "UTF-8";
+
+#searchForm {
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+	-webkit-border-horizontal-spacing: 0;
+	-webkit-border-vertical-spacing: 0;
+
+}
+#searchForm th {
+	background-color: lightgrey;
+}
+
+#searchForm td {
+	border-top: 1px solid lightgrey;
+	border-right: 1px solid lightgrey;
+	border-left: 1px solid lightgrey;
+}
+
+#searchForm tr:last-child td {
+	border-left: 0;
+	border-right: 0;
+}
+
+#searchForm input {
+	outline: none;
+	margin: 10px 0;
+}
+
+#searchForm [type=text] {
+	height:22px;
+	width: 200px;
+}
+
+#searchForm #myRsvHotelNameInput {
+	width: 300px;
+}
+
+
+#searchForm select {
+	height: 28px;
+	width: 200px;
+}
+
+#searchForm [type=button],
+#searchForm [type=reset],
+#searchForm [type=submit] {
+	width: 60px;
+	height: 28px;
+}
+
+#searchForm #btnPeriodCell {
+	text-align: right;
+	padding-right: 57px;
+}
+
+/* datepicker의 달력아이콘 위치 조정 */
+.ui-datepicker-trigger {
+	margin-bottom: -10px; 
+	cursor: pointer;
+}
+
+
+#reservationTable {
+	margin: 30px auto;
+	width: 80%;
+	text-align: center;
+	-webkit-border-horizontal-spacing: 0;
+	border-top: 1px solid #a6a7ab;
+	border-bottom: 1px solid #a6a7ab;
+
+}
+
+#reservationTable th,
+#reservationTable td {
+	padding:5px 0;
+}
+
+#reservationTable th {
+	border-bottom: 1px solid #a6a7ab;
+
+}
+
+#reservationTable button {
+	border: 0;
+	padding: 0 8px;
+	height: 25px;
+	cursor: pointer;
+}
+
+#pagingDiv {
+	text-align: center;
+}
+
+#pagingDiv a {
+	text-decoration: none;
+	color: black;
+}

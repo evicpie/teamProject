@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Review_Comment">
+	<resultMap type="ReviewComment" id="ReviewCommentResult">
+		<result column="reviewCmtCode" property="reviewCmtCode"/>
+		<result column="guestId" property="guestId"/>
+		<result column="guestName" property="guestName"/>
+		<result column="reviewCode" property="reviewCode"/>
+		<result column="reviewCmtContent" property="reviewCmtContent"/>
+		<result column="reviewCmtDate" property="reviewCmtDate"/>
+		<result column="reviewCmtIp" property="reviewCmtIp"/>
+		<result column="reviewCmtGroup" property="reviewCmtGroup"/>
+		<result column="reviewCmtStep" property="reviewCmtStep"/>
+		<result column="reviewCmtIndent" property="reviewCmtIndent"/>
+	</resultMap>
+	
+	<!-- 리뷰에 달린 댓글 총 개수 조회하는 쿼리 -->
+	<select id="reviewCommentCnt" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM REVIEW_COMMENT WHERE REVIEWCODE=#{reviewCode}
+	</select>
+	
+	<!-- 리뷰에 달린 댓글 목록 불러오는 쿼리 -->
+	<select id="reviewCommentList" parameterType="ReviewComment" resultMap="ReviewCommentResult">
+		SELECT * FROM (SELECT ROWNUM AS RN, ALLIAS.* FROM 
+		(SELECT CMT.*, GUESTNAME FROM REVIEW_COMMENT CMT, GUEST WHERE CMT.GUESTID=GUEST.GUESTID AND REVIEWCODE=#{reviewCode} ORDER BY REVIEWCMTGROUP DESC, REVIEWCMTSTEP ASC) ALLIAS) 
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 원댓글 작성하는 쿼리 -->
+	<insert id="writeReviewComment" parameterType="ReviewComment">
+		INSERT INTO REVIEW_COMMENT (REVIEWCMTCODE, GUESTID, REVIEWCODE, REVIEWCMTCONTENT, REVIEWCMTDATE, REVIEWCMTIP, REVIEWCMTGROUP, REVIEWCMTSTEP, REVIEWCMTINDENT) 
+		VALUES (REVIEW_COMMENT_SEQ.NEXTVAL, #{guestId}, #{reviewCode}, #{reviewCmtContent}, SYSDATE, #{reviewCmtIp}, REVIEW_COMMENT_SEQ.CURRVAL, 0, 0)
+	</insert>
+	
+	<!-- 대댓글 작성하는 쿼리 -->
+	<insert id="replyReviewComment" parameterType="ReviewComment">
+		INSERT INTO REVIEW_COMMENT (REVIEWCMTCODE, GUESTID, REVIEWCODE, REVIEWCMTCONTENT, REVIEWCMTDATE, REVIEWCMTIP, REVIEWCMTGROUP, REVIEWCMTSTEP, REVIEWCMTINDENT) 
+		VALUES (REVIEW_COMMENT_SEQ.NEXTVAL, #{guestId}, #{reviewCode}, #{reviewCmtContent}, SYSDATE, #{reviewCmtIp}, #{reviewCmtGroup}, #{reviewCmtStep}+1, #{reviewCmtIndent}+1)
+	</insert>
+	
+	<!-- 대댓글 작성 전 수행하는 Step A -->
+	<update id="replyStepA" parameterType="ReviewComment">
+		UPDATE REVIEW_COMMENT SET REVIEWCMTSTEP=REVIEWCMTSTEP+1 WHERE REVIEWCMTGROUP=#{reviewCmtGroup} AND REVIEWCMTSTEP>#{reviewCmtStep}
+	</update>
+	
+	<!-- 댓글 하나 불러오는 쿼리 -->
+	<select id="getOneReviewComment" parameterType="int" resultType="ReviewComment">
+		SELECT CMT.*, GUESTNAME FROM REVIEW_COMMENT CMT, GUEST WHERE CMT.GUESTID=GUEST.GUESTID AND REVIEWCMTCODE=#{reviewCmtCode}
+	</select>
+	
+	<!-- 댓글 수정하는 쿼리 -->
+	<update id="modifyReviewComment" parameterType="ReviewComment">
+		UPDATE REVIEW_COMMENT SET REVIEWCMTCONTENT=#{reviewCmtContent}, REVIEWCMTIP=#{reviewCmtIp} WHERE REVIEWCMTCODE=#{reviewCmtCode}
+	</update>
+	
+	<!-- 댓글 삭제하는 쿼리(답글이 없을경우) -->
+	<delete id="deleteReviewComment" parameterType="int">
+		DELETE FROM REVIEW_COMMENT WHERE REVIEWCMTCODE=#{reviewCmtCode}
+	</delete>
+	
+	<!-- 2차통합 후 추가 -->	
+	<!-- 댓글 삭제하는 쿼리(답글이 있을 경우) -->
+	<update id="deleteRepliedComment" parameterType="int">
+		UPDATE REVIEW_COMMENT SET REVIEWCMTCONTENT='삭제된 댓글입니다' WHERE REVIEWCMTCODE=#{reviewCmtCode}
+	</update>
+	
+	<!-- 댓글에 대댓글이 있는지 확인하는 쿼리 : 내 바로 밑의 글의 들여쓰기를 리턴한다. 들여쓰기가 나보다 작으면 답글이 있는 것. -->
+	<select id="checkReplyComment" parameterType="int" resultType="int">
+		SELECT REVIEWCMTINDENT FROM REVIEW_COMMENT 
+		WHERE REVIEWCMTGROUP = (SELECT REVIEWCMTGROUP FROM REVIEW_COMMENT WHERE REVIEWCMTCODE=#{reviewCmtCode}) 
+		AND REVIEWCMTSTEP = (SELECT REVIEWCMTSTEP+1 FROM REVIEW_COMMENT WHERE REVIEWCMTCODE=#{reviewCmtCode})
+	</select>
+	
+</mapper>

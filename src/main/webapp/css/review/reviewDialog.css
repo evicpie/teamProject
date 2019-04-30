@@ -1,0 +1,66 @@
+/* 리뷰 작성/수정 다이얼로그에 쓰는 CSS */
+/* myPastReservation.jsp, reviewFrame.jsp */
+@charset "UTF-8";
+
+#dialog-form table {
+
+    width: 100%;
+}
+
+#dialog-form table tbody th {
+    width: 40%;
+    padding: 15px 0;
+    
+}
+
+#dialog-form table tbody [name="reviewTitle"] {
+    width: 100%;
+
+
+}
+#dialog-form textarea {
+    width: 100%;
+    height: 140px;
+}
+
+#dialog-form #rvFileShow {
+    width: 70%;
+}
+
+#dialog-form label {
+    padding: 3px 8px;
+    background-color: #58585A;
+    color: white;
+}
+
+/* 별점 슬라이더 스타일 */
+#scoreCell {
+	text-align: center;
+	padding: 2px 0;
+}
+#slider {
+	margin: 0 auto;
+	width: 300px;
+	height: 58px;
+	border :0;
+	background-image: url('/hotel/img/graystar.png');
+}
+
+#cover {
+	width: 0;
+	height: 58px;
+	background-image: url('/hotel/img/star.png');
+}
+
+#slider span {
+	height: 58px;
+	background-color: transparent;
+	border: 0;
+	outline: none;
+}
+
+/* 사진 첨부 input 요소 숨기기 */ 
+#rvFileName {
+    display: none;
+
+}

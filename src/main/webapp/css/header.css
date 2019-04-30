@@ -1,0 +1,64 @@
+/* header CSS File */
+@charset "UTF-8";
+
+* {	
+	padding:0;
+	margin:0;position: relative;
+}
+header a { text-decoration: none; }
+header li { list-style: none; }
+	
+header {
+	position: relative;
+	z-index:2; /* [은실] 호텔소개 페이지의 지도까지 덮으려면 2 이상 되어야 함 */
+}
+ #hotel{
+	position: fixed;
+ 	top:0px;
+	left:0px;
+	width:1890px;
+	min-width: 1890px;
+	height:80px;
+
+}
+#hotel #ribbon{
+	position:relative;
+}
+#hotel #ribbon #ribbonImg{
+	height:190px;
+	width:1890px;
+}
+#gnb {
+	top:-175px;
+	margin:0px 50px;
+	height:80px;
+	line-height:60px;
+	float:right;
+}
+	
+#gnb li {
+	margin:10px;
+	float:left;
+}
+#gnb li a, #gnb li span{
+	color:white;
+	font-family: 'Rubik', sans-serif;
+    font-size:1.2em;
+}
+#logo{
+	margin: 0px 20px;
+	padding:30px;
+	height:90px;
+	width:100px;
+	float:left;
+	top:-200px;
+	background-color:#eac49d;
+	border-radius: 0px 0px 20px 20px;
+	border:10px solid white;
+	cursor: pointer;/* [은실] 로고에 마우스를 올리면 손 모양 커서가 나타나도록 하여 클릭하는 부분임을 알림 */
+}
+
+#logo img{
+	margin:0px;
+	width:100px;
+}

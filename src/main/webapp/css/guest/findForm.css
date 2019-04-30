@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+body{
+	padding-top:250px;
+	border:1px solid blue;
+}
+#content #form{
+	margin:0 auto;
+	padding:50px;
+	border-radius:20px;
+	border:3px solid #e9b8bc;
+}
+#content #form td{
+	padding:15px 60px;
+	color:#ababab;
+}
+#content #form td input{
+	border:1px solid #e9b8bc;
+	width:340px;
+	height:25px;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color:#808080;
+}
+#content #form td .phone{
+	border:1px solid #e9b8bc;
+	width:100px;
+	height:25px;
+	text-align: center;
+}
+#content #form #complete{
+	padding:20px;
+}
+#content #form .findNotice{
+	padding:15px;
+	font-size: 1.2em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+}
+#content #form #buttonForm{
+	text-align:center;
+}
+#content #form td #button{
+	background-color: #ca7a85;
+	border-radius:5px;
+	color:white;
+	border:1px;
+	width:90px;
+	height:40px;
+	font-size: 1.5em;
+	cursor: pointer; /* 손모양 마우스 포인터 */
+}
+#content #form td button{
+	margin:0px 15px;
+	background-color: #ca7a85;
+	border-radius:5px;
+	color:white;
+	border:1px;
+	width:150px;
+	height:40px;
+	font-size: 1.3em;
+	cursor: pointer; /* 손모양 마우스 포인터 */
+}
+#content #form th{
+	font-size: 1.5em;
+	font-weight: bold;
+	font-family: 'Rubik', sans-serif;
+	color : #705c5c;
+	text-align: center;
+}

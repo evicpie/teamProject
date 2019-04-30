@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "Event">
+	<resultMap type="Event" id="EventResult">
+		<result property="eventNum" column="eventNum"/>
+		<result property="eventTitle" column="eventTitle"/>
+		<result property="eventBanner" column="eventBanner"/>
+		<result property="eventImg1" column="eventImg1"/>
+		<result property="eventImg2" column="eventImg2"/>
+		<result property="eventImg3" column="eventImg3"/>
+		<result property="eventInfo" column="eventInfo"/>
+	</resultMap>
+	<!-- 이벤트 모든 리스트(최신순) -->
+	<select id="eventListAll" resultMap="EventResult">
+		SELECT * FROM EVENT ORDER BY EVENTNUM DESC
+	</select>
+	
+	<!-- 이벤트 등록순 PAGING처리(최신순)  -->
+	<select id="eventListPaging" parameterType="Event" resultMap="EventResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM EVENT ORDER BY EVENTNUM DESC) A) WHERE RN BETWEEN #{startRow} AND #{endRow}
+		
+	</select>
+	<select id="getEvent" parameterType="int" resultType="Event">
+		SELECT * FROM EVENT WHERE EVENTNUM=#{eventNum}
+	</select>
+	
+	<!-- [은실] 이벤트에서 뿌릴 증정 포인트 컬럼 추가 -->
+	<insert id="registerEvent" parameterType="Event">
+		<if test="eventImg2=='' and eventImg3!=''">
+			INSERT INTO EVENT (EVENTNUM, EVENTTITLE, EVENTBANNER, EVENTIMG1, EVENTIMG3, EVENTINFO, SENDPOINT) VALUES 
+			(EVENT_SEQ.NEXTVAL, #{eventTitle}, #{eventBanner}, #{eventImg1}, #{eventImg3}, #{eventInfo}, #{sendPoint})
+		</if>
+		<if test="eventImg2!='' and eventImg3==''">
+			INSERT INTO EVENT (EVENTNUM, EVENTTITLE, EVENTBANNER, EVENTIMG1, EVENTIMG2, EVENTINFO, SENDPOINT) VALUES 
+			(EVENT_SEQ.NEXTVAL, #{eventTitle}, #{eventBanner}, #{eventImg1}, #{eventImg2}, #{eventInfo}, #{sendPoint})
+		</if>
+		<if test="eventImg2=='' and eventImg3==''">
+			INSERT INTO EVENT (EVENTNUM, EVENTTITLE, EVENTBANNER, EVENTIMG1, EVENTINFO, SENDPOINT) VALUES 
+			(EVENT_SEQ.NEXTVAL, #{eventTitle}, #{eventBanner}, #{eventImg1}, #{eventInfo}, #{sendPoint})
+			
+		</if>
+		<if test="eventImg2!='' and eventImg3!=''">
+			INSERT INTO EVENT (EVENTNUM, EVENTTITLE, EVENTBANNER, EVENTIMG1, EVENTIMG2, EVENTIMG3, EVENTINFO, SENDPOINT) VALUES 
+			(EVENT_SEQ.NEXTVAL, #{eventTitle}, #{eventBanner}, #{eventImg1}, #{eventImg2}, #{eventImg3}, #{eventInfo}, #{sendPoint})
+			
+		</if>
+	</insert>
+	
+	<update id="modifyEvent" parameterType="Event">
+		UPDATE EVENT SET
+		    EVENTTITLE=#{eventTitle},
+		    <if test="eventBanner!=''">
+		    	EVENTBANNER=#{eventBanner},
+		    </if>
+		    <if test="eventImg1!=''">
+		    	EVENTIMG1=#{eventImg1},
+		    </if>
+		    <if test="eventImg2!=''">
+		    	EVENTIMG2=#{eventImg2},
+		    </if>
+		    <if test="eventImg3!=''">
+		    	EVENTIMG3=#{eventImg3},
+		    </if>
+		    EVENTINFO=#{eventInfo},
+		    EVENTSTATUS=#{eventStatus},
+		    SENDPOINT=#{sendPoint} 
+		    WHERE EVENTNUM=#{eventNum}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		DELETE FROM EVENT WHERE EVENTNUM=#{eventNum}
+	</delete>
+	
+	<!-- 페이징 때 쓰려고 등록된 이벤트 갯수-->
+	<select id="cntEvent" resultType="int">
+		SELECT COUNT(*) FROM EVENT
+	</select>
+</mapper>

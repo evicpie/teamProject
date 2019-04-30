@@ -1,0 +1,27 @@
+/* 예약 취소 다이얼로그 CSS */
+@charset "UTF-8";
+
+#dialog-confirm {
+	text-align: center;
+}
+
+#dialog-confirm #refundPolicy {
+	background-color: #eeeeee;
+	padding: 10px;
+}
+
+#dialog-confirm #refundPolicy p {
+	margin: 5px;
+	font-weight: bold;
+
+}
+
+#dialog-confirm table {
+	margin: 15px auto;
+
+}
+
+#dialog-confirm th,
+#dialog-confirm td {
+	padding: 5px 10px;
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Hotel_Notice">
+	<resultMap type="Hotel_Notice" id="Hotel_NoticeResult">
+		<result column="noticeCode" property="noticeCode"/>
+		<result column="adminId" property="adminId"/>
+		<result column="noticeTitle" property="noticeTitle"/>
+		<result column="noticeContent" property="noticeContent"/>
+		<result column="noticeFile" property="noticeFile"/>
+		<result column="noticeDate" property="noticeDate"/>
+		<result column="noticeIp" property="noticeIp"/>
+		<result column="noticeView" property="noticeView"/>
+		<result column="startRow" property="startRow"/>
+		<result column="endRow" property="endRow"/>
+	</resultMap>
+	<select id="hotel_notice_list" parameterType="Hotel_Notice" resultMap="Hotel_NoticeResult">
+		SELECT * FROM
+    		(SELECT A.*, ROWNUM RN FROM
+    	<if test="schItem=='' or schItem==null">
+    		(SELECT * FROM HOTEL_NOTICE
+    	</if>
+	    <if test="schItem=='adminId'">
+	    	(SELECT * FROM HOTEL_NOTICE WHERE ADMINID LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='noticeTitle'">
+	    	(SELECT * FROM HOTEL_NOTICE WHERE NOTICETITLE LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='noticeContent'">
+	    	(SELECT * FROM HOTEL_NOTICE WHERE NOTICECONTENT LIKE '%' || #{schWord} || '%'
+	    </if>
+	    <if test="schItem=='noticeTitleContent'">
+	    	(SELECT * FROM HOTEL_NOTICE WHERE NOTICETITLE LIKE '%' || #{schWord} || '%' OR NOTICECONTENT LIKE '%' || #{schWord} || '%'
+	    </if>
+	   ORDER BY NOTICECODE DESC)A) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	<insert id="hotel_notice_write" parameterType="Hotel_Notice">
+		INSERT INTO HOTEL_NOTICE (NOTICECODE, ADMINID, NOTICETITLE, NOTICECONTENT, NOTICEFILE, NOTICEIP) 
+		VALUES (HOTEL_NOTICE_SEQ.NEXTVAL, #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeFile}, #{noticeIp})
+	</insert>
+	<update id="hotel_notice_modify" parameterType="Hotel_Notice">
+		UPDATE HOTEL_NOTICE SET ADMINID = #{adminId}, 
+                        		NOTICETITLE = #{noticeTitle}, 
+                        		NOTICECONTENT = #{noticeContent}, 
+                        		NOTICEFILE = #{noticeFile},
+                        		NOTICEIP = #{noticeIp}
+                  		  WHERE NOTICECODE = #{noticeCode}
+	</update>
+	<delete id="hotel_notice_delete" parameterType="int">
+		DELETE HOTEL_NOTICE WHERE NOTICECODE = #{noticeCode}
+	</delete>
+	<select id="hotel_notice_view" parameterType="int" resultType="Hotel_Notice">
+		SELECT * FROM HOTEL_NOTICE WHERE NOTICECODE = #{noticeCode}
+	</select>
+	<update id="hotel_notice_viewup" parameterType="int">
+		UPDATE HOTEL_NOTICE SET NOTICEVIEW = NOTICEVIEW + 1 WHERE NOTICECODE = #{noticeCode}
+	</update>
+	<select id="counthotel_notice" parameterType="Hotel_Notice" resultType="int">
+		SELECT COUNT(*) FROM HOTEL_NOTICE
+		<if test="schItem=='' or schItem==null">
+    		WHERE 1=1
+    	</if>
+	    <if test="schItem=='adminId'">
+	    	WHERE ADMINID LIKE '%'||#{schWord}||'%'
+	    </if>
+	    <if test="schItem=='noticeTitle'">
+	    	WHERE NOTICETITLE LIKE '%'||#{schWord}||'%'
+	    </if>
+	    <if test="schItem=='noticeContent'">
+	    	WHERE NOTICECONTENT LIKE '%'||#{schWord}||'%'
+	    </if>
+	    <if test="schItem=='noticeTitleContent'">
+	    	WHERE NOTICETITLE LIKE '%'||#{schWord}||'%' OR NOTICECONTENT LIKE '%'||#{schWord}||'%'
+	    </if>
+	</select>
+</mapper>

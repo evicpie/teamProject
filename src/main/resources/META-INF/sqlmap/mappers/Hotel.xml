@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="Hotel">
+	<resultMap type="Hotel" id="HotelResult">
+		<result column="hotelCode" property="hotelCode"/>
+		<result column="adminId" property="adminId"/>
+		<result column="hotelName" property="hotelName"/>
+		<result column="hotelAddress" property="hotelAddress"/>
+		<result column="hotelPhone" property="hotelPhone"/>
+		<result column="hotelImg_1" property="hotelImg_1"/>
+		<result column="hotelImg_2" property="hotelImg_2"/>
+		<result column="hotelImg_3" property="hotelImg_3"/>
+		<result column="hotelNotice" property="hotelNotice"/>
+		<result column="hotelDetail" property="hotelDetail"/>
+		<result column="hotelScore" property="hotelScore"/>
+	</resultMap>
+	
+	<!-- 호텔 관련 쿼리 -->
+	<select id="getHotel" parameterType="String" resultType="Hotel">
+		SELECT * FROM HOTEL WHERE hotelCode=#{hotelCode}
+	</select>
+	<select id="hotelManage" parameterType="String" resultType="Hotel">
+		SELECT * FROM HOTEL WHERE adminID=#{adminId}
+	</select>
+	<update id="hotelModify" parameterType="Hotel">
+		UPDATE HOTEL SET HOTELNAME=#{hotelName},
+                         HOTELADDRESS=#{hotelAddress},
+                         HOTELPHONE=#{hotelPhone},
+                         <if test="hotelImg_1!=''">
+                         hotelIMG_1=#{hotelImg_1},
+                         </if>
+                         <if test="hotelImg_2!=''">
+                         hotelIMG_2=#{hotelImg_2},
+                         </if>
+                         <if test="hotelImg_3!=''">
+                         hotelIMG_3=#{hotelImg_3},
+                         </if>
+                         hotelNOTICE=#{hotelNotice},
+                         hotelDETAIL=#{hotelDetail}
+                   WHERE ADMINID=#{adminId}
+	</update>
+</mapper>

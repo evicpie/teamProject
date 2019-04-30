@@ -1,0 +1,11 @@
+@charset "UTF-8";
+#titleM{margin-top:170px; text-align:center; font-size: 2em; color:#74442d; font-weight: bold; padding: 20px;}
+#btns{width : 470px; overflow: hidden; margin: 0 auto;}
+#hotelM{width:232px; float: left;}
+.bigBtn{width: 220px; height: 220px; margin: 9px; background-color:#eac49d; border: 3px solid #db9478; border-radius: 20px;
+		color:#c2796b ; font-weight: bold; font-size: 2em;}
+.bigBtn:hover{background-color:#c2796b; border: 3px solid #eac49d; color:#db9478; cursor: pointer;}		
+#roomM{float: left; width: 202px;}
+.smallBtn{width: 220px; height: 60px; margin: 10px; 9px; background-color:#e9e8ca; border: 3px solid #db9478; border-radius: 20px;
+		color:#c2796b ; font-weight: bold; font-size: 1.3em;}
+.smallBtn:hover{background-color:#74442d; border: 3px solid #db9478; color:#e9e8ca; cursor: pointer;}
